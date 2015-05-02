@@ -9,12 +9,16 @@ class UserController extends BaseController {
             $pass = $_POST['pass'];
             
             if ($model->logIn($user, $pass)) {
-                $this->redirect('home');
                 $this->addInfoMessage($this->msg);
             }   else {
-                $this->redirect('home');
                 $this->addErrorMessage($this->msg);
             }
+            $this->redirect('home');
         }  
+    }
+    function LogOut() {
+        session_destroy();
+        $this->addInfoMessage("Успешен изход");
+        $this->redirect('home');
     }
 }

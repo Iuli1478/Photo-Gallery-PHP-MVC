@@ -72,10 +72,12 @@ abstract class BaseController {
     }
     
     function addInfoMessage($msg) {
-        $this->addMessage($msg, 'info');
+        $_SESSION['messagesInfo'] = $msg;
+       // $this->addMessage($msg, 'info');
     }
 
     function addErrorMessage($msg) {
-        $this->addMessage($msg, 'error');
+        $_SESSION['messagesErr'] = $msg;
+        //$this->addMessage($msg, 'error');
     }
 }

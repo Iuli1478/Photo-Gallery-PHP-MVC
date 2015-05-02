@@ -46,6 +46,11 @@
                                     echo '<li><a href="#" style="margin-right: 10px;" type="button" data-toggle="modal" data-target="#loginModal">Вход</a></li>';
                                     echo '<li><a href="#" style="margin-right: 10px;" type="button" data-toggle="modal" data-target="#registrationModal">Регистрация</a></li>';
                                     echo '</ul>';  
+                                } else{
+                                    echo '<ul class="nav navbar-nav navbar-right">';
+                                    echo '<li><a href="user/logOut" style="margin-right: 10px;" type="button">Излез</a></li>'; 
+                                    echo '</ul>'; 
+                                    
                                 }
                             ?>
                         </div>
