@@ -3,6 +3,8 @@
 <head>
     <link href="/content/styles/styles.css" rel="stylesheet" type="text/css"/>
     <link href="/content/styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/content/styles/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/content/styles/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <script src="/content/scripts/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
     <script src="/content/scripts/bootstrap/bootstrap.min.js" type="text/javascript"></script>
     <title>
@@ -16,14 +18,41 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <header>
-        <a href="/"><img src="/content/img/logo.jpg" /></a>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/authours/create">Create</a></li>
-            <li><a href="/authours">Authors</a></li>
-            <li><a href="/books/books">Books</a></li>
-        </ul>
-    </header>
+    <div class="row" style="margin-right: 0;" >
+      <div class="col-md-1 col-xs-0 col-lg-1"></div>
+        <div style="padding-right: 0" class="col-md-10 col-xs-12 col-lg-10">
+            <div id="mine">
+                <header>
+                    <nav class="navbar navbar-default navbar-static-top">
+                        <div class="container-fluid">
 
-    <?php include('messages.php'); ?>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/">Начало</a></li>
+                                <li><a href="/gallery">Галерия</a></li>
+                                <li><a href="/authours">Authors</a></li>
+                                <li><a href="/books/books">Books</a></li>
+                            </ul> 
+                            <?php 
+                                if (!UserDetails::isLogged()){
+                                    echo '<ul class="nav navbar-nav navbar-right">';
+                                    echo '<li><a href="#" style="margin-right: 10px;" type="button" data-toggle="modal" data-target="#loginModal">Вход</a></li>';
+                                    echo '<li><a href="#" style="margin-right: 10px;" type="button" data-toggle="modal" data-target="#registrationModal">Регистрация</a></li>';
+                                    echo '</ul>';  
+                                }
+                            ?>
+                        </div>
+                        </div>
+                    </nav>
+                    <a href="/"><img class="logo" src="/content/img/logo.png" /></a>
+                </header>
+                <?php include('messages.php'); ?>
+                <?php include('login.php'); ?>
+                <?php include('registration.php'); ?>
