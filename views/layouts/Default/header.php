@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="/content/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="/content/styles/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="/content/styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script src="/content/scripts/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <script src="/content/scripts/bootstrap/bootstrap.min.js" type="text/javascript"></script>
     <title>
         <?php
             if (isset($this->title)) {
