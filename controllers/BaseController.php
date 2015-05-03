@@ -68,16 +68,16 @@ abstract class BaseController {
             $_SESSION['messages'] = array();
         }
         array_push($_SESSION['messages'],
-            array('text' => $msg, 'type' => $type));
+        array('text' => $msg, 'type' => $type));
     }
     
     function addInfoMessage($msg) {
-        $_SESSION['messagesInfo'] = $msg;
-       // $this->addMessage($msg, 'info');
+        //$_SESSION['messagesInfo'] = $msg;
+        $this->addMessage($msg, 'info');
     }
 
     function addErrorMessage($msg) {
-        $_SESSION['messagesErr'] = $msg;
-        //$this->addMessage($msg, 'error');
+        //$_SESSION['messagesErr'] = $msg;
+        $this->addMessage($msg, 'error');
     }
 }

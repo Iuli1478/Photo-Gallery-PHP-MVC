@@ -6,9 +6,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Регистрация</h4>
       </div>
-        <form role="form" method="post">
+        <form role="form" method="post" action="user/Register">
             <div class="modal-body">
-                
                <div class="form-group">
                      <label for="username_name"><i class="fa fa-user"></i> Потребителско Име</label>
                      <input name="user" type="text" class="form-control" id="username_name" placeholder="Потребителско име">
@@ -25,12 +24,12 @@
                      <label for="user_pass"><i class="fa fa-key"></i> Паролата отново</label>
                      <input name="repass" type="password" class="form-control" id="user_pass" placeholder="Парола">
                 </div>
-             <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Откажи</button>
-                    <input type="submit" name="register" class="btn btn-success pull-right" value="Регистрация" />
-             </div>
+                <div class="modal-footer">
+                       <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Откажи</button>
+                       <input type="submit" name="register" class="btn btn-success pull-right" value="Регистрация" />
+                </div>
+            </div>
         </form>
-      </div>
     </div>
   </div>
 </div>
