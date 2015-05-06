@@ -13,11 +13,14 @@ if (!Security::IsPermissionsUser()) {
             foreach ($this->catalogs as $catalog){
                 echo "<span style='cursor:pointer;' class='categoryContent' title='" . htmlspecialchars($catalog['Description']) . "' href='#'>  ";
                     echo '<div  class="col-md-3 col-xs-10 col-lg-2 category">';
+                        echo '<span class="iconsCatalog"><i onclick="addPhoto('. $catalog['Id'] .')" title="Добавяне на снимка" class="fa fa-plus-circle"></i>';
+                        echo '<i onclick="editCatalog(\''.htmlspecialchars($catalog['Name']).'\',\''.htmlspecialchars($catalog['Description']).'\',' 
+                                 . $catalog['Id'] . ')" title="редакция" class="fa fa-pencil rightSpase"></i>';
+                        echo '<i  onclick="confirmDelete(\''.htmlspecialchars($catalog['Name']).'\','. $catalog['Id'] .')" '
+                                . 'title="изтриване" class="fa fa-trash-o rightSpase"></i></span>' ;
                         echo "<div class='row'>";
-                            echo '<div class="col-md-12 col-xs-12 col-lg-12 categoryTitle"> '
-                                 . ' <span onclick="editCatalog(\''.htmlspecialchars($catalog['Name']).'\',\''.htmlspecialchars($catalog['Description']).'\',' 
-                                 . $catalog['Id'] . ')" title="Редакция"><img src="/content/img/edit.png" alt=""/></span><span>' . htmlspecialchars($catalog['Name']) . '</span>';  
-                                 echo '<a title="Изтриване" onclick="confirmDelete(\''.htmlspecialchars($catalog['Name']).'\','. $catalog['Id'] .')" href="#"> <img src="/content/img/delete.png" alt="изтриване"/></a>';
+                        echo '<div class="col-md-12 col-xs-12 col-lg-12 categoryTitle"> '
+                                 . '<span>' . htmlspecialchars($catalog['Name']) . '</span>'; 
                             echo  '</div>';
                         echo "</div>";
                         echo "<div class='row'>";
@@ -34,6 +37,7 @@ if (!Security::IsPermissionsUser()) {
 <?php
     require 'add.php';
     require 'edit.php';
+    include 'addPhoto.php';
 ?>
 <!-- Modal confirmDelete-->
 <div style="text-align: left" class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -41,7 +45,7 @@ if (!Security::IsPermissionsUser()) {
     <div class="modal-content">
       <div style="text-align: center" class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Сигурни ли сте, че изкате да изтриете категория <span class="categoyName"></span> </h4>
+        <h4 class="modal-title" id="myModalLabel">Наистина ли искате да изтриете този каталог ? <br /> <span style="color: red;">Внимание!! Ако изтриете каталог ще бъдат изтрити всички снимки в него !!! </span><span class="categoyName"></span> </h4>
       </div>
         <form enctype="multipart/form-data" role="form" method="post">
             <input id="catalogIdConfirm" type="hidden" name="id" />

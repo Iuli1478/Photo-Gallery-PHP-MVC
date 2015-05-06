@@ -10,11 +10,23 @@ class CatalogModel extends BaseModel {
     }
      
     public function delete($Id) {
+        
+        $deletePhotosStatement = self::$db->prepare("DELETE FROM `photos` WHERE CatalogId=?");
+        $deletePhotosStatement->bind_param("i", $Id);
+        $deletePhotosStatement->execute(); 
+        $isDeleteAllPhoto = $deletePhotosStatement->affected_rows > 0;
+        
         $statement = self::$db->prepare(
         "DELETE FROM catalogs WHERE Id = ?");
         $statement->bind_param("i", $Id);
         $statement->execute();
-        return $statement->affected_rows > 0;
+        $isDeleteCatalog = $statement->affected_rows > 0;
+        
+        if ($isDeleteAllPhoto == TRUE && $isDeleteCatalog == TRUE) {
+            return TRUE;
+        } else{
+            return FALSE;
+        }
     }
     
     public function AddCatalog($name, $description, $upload) {

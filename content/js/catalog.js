@@ -16,3 +16,8 @@ function confirmDelete(name, id){
     $('#catalogIdConfirm').val(id);
     $('#confirmDeleteModal').modal('show');
 }
+function addPhoto(catalogId){
+    debugger;
+    $('#photoWithCatalogIdId').val(catalogId);
+    $('#addPhotoModal').modal('show');
+}
