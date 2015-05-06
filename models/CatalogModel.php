@@ -25,13 +25,13 @@ class CatalogModel extends BaseModel {
             return FALSE;
         }
 
-        if (!Security::lenght($name, 4)) {
+        if (!Security::lenght($name, 4, 100)) {
             $_SESSION['msgContent'] = "Допустимата дължина на името е от 4 до 20 символа.";
             return FALSE;
         }
 
-        if (!Security::lenght($description, 4, 200)) {
-            $_SESSION['msgContent'] = "Допустимата дължина на описанието е от 4 до 200 символа.";
+        if (!Security::lenght($description, 0, 200)) {
+            $_SESSION['msgContent'] = "Допустимата дължина на описанието е до 200 символа.";
             return FALSE;
         }
 
@@ -43,4 +43,32 @@ class CatalogModel extends BaseModel {
         $_SESSION['msgContent'] = "каталогът беше успешно добавен!";
         return TRUE;
     }
+    
+    public function EditCatalog($name, $description, $id) {
+        $userId  = UserDetails::getUserId();
+
+        if ($userId == FALSE) {
+            $_SESSION['msgContent'] = "Нямате достъп";
+            return FALSE;
+        }
+
+        if (!Security::lenght($name, 4, 100)) {
+            $_SESSION['msgContent'] = "Допустимата дължина на името е от 4 до 20 символа.";
+            return FALSE;
+        }
+
+        if (!Security::lenght($description, 0, 200)) {
+            $_SESSION['msgContent'] = "Допустимата дължина на описанието е до 200 символа.";
+            return FALSE;
+        }
+
+        $update = self::$db->prepare(
+        "UPDATE `catalogs` SET `Name`=?,`Description`=? WHERE `Id`=$id");
+        $update->bind_param('ss', $name, $description);
+        $update->execute();
+
+        $_SESSION['msgContent'] = "каталогът беше успешно редактирън!";
+        return TRUE;
+    }
+    
 }
