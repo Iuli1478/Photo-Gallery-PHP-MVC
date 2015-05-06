@@ -1,20 +1,38 @@
+<script>  
+    function showSuccessMessage(msg) {
+        noty({
+            text: msg,
+            theme: 'bootstrapTheme',
+            type: 'success',
+            timeout: 1000,
+            layout: 'top',
+            
+        });
+    }
+    function showErrorMessage(msg) {
+
+        noty({
+            text: msg,
+            theme: 'bootstrapTheme',
+            type: 'error',
+            timeout: 1000,
+            layout: 'top'
+            
+        });
+    }
 <?php
 if (isset($_SESSION['messages'])) {
-    echo '<ul>';
+           
     foreach ($_SESSION['messages'] as $msg) {
-        echo '<li class="' . $msg['type'] . '">';
-        echo htmlspecialchars($msg['text']);
-        echo '</li>';
+        if ($msg['type'] == 'info') {
+            echo 'showSuccessMessage("' . htmlspecialchars($msg['text']) . '");';
+        } else{
+            echo 'showErrorMessage("' . htmlspecialchars($msg['text']) . '");';
+        }
     }
-    echo '</ul>';
     unset($_SESSION['messages']);
 }
+?>
+</script>
 
-/*if (isset( $_SESSION['messagesInfo'])) {
-    echo "<span class='InfoMsg'>" . htmlspecialchars($_SESSION['messagesInfo']) . "</span>";
-    unset($_SESSION['messagesInfo']);
-}
-if (isset( $_SESSION['messagesErr'])) {
-    echo "<span class='ErrMsg'>" . htmlspecialchars($_SESSION['messagesErr']) . "</span>";
-    unset($_SESSION['messagesErr']);
-}*/
+

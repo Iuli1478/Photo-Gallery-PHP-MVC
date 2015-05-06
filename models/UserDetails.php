@@ -15,4 +15,11 @@ class UserDetails {
             return FALSE;
         }
     }
+    public static function getUserName() {
+        if (isset($_SESSION['user'])) {
+            return $_SESSION['user'];
+        } else {
+            return FALSE;
+        }
+    }
 }

@@ -1,6 +1,13 @@
 <?php
 
 class UserModel extends BaseModel {
+    
+   public function getAll() {
+        $statement = self::$db->query(
+            "SELECT * FROM users ORDER BY Id");
+        return $statement->fetch_all(MYSQLI_ASSOC);
+    }
+    
     public function logIn($user, $pass) {
         
         if (!empty($user) && !empty($pass)) {

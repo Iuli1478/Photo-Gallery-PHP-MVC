@@ -3,33 +3,40 @@
 class CatalogModel extends BaseModel {
   
     public function getAll() {
+        $statement = self::$db->query(
+            "SELECT * FROM catalogs ORDER BY Name");
+        return $statement->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    public function getAllById() {
         $userId  = UserDetails::getUserId();
         $statement = self::$db->query(
             "SELECT * FROM catalogs WHERE UserId=$userId ORDER BY Name");
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
      
+    public function getByCategoryId($categoryId) {
+
+        $statement = self::$db->query(
+            "SELECT * FROM catalogs WHERE categoryId=$categoryId ORDER BY Name");
+        return $statement->fetch_all(MYSQLI_ASSOC);
+    }
+    
     public function delete($Id) {
         
         $deletePhotosStatement = self::$db->prepare("DELETE FROM `photos` WHERE CatalogId=?");
         $deletePhotosStatement->bind_param("i", $Id);
         $deletePhotosStatement->execute(); 
-        $isDeleteAllPhoto = $deletePhotosStatement->affected_rows > 0;
+       
         
         $statement = self::$db->prepare(
         "DELETE FROM catalogs WHERE Id = ?");
         $statement->bind_param("i", $Id);
         $statement->execute();
-        $isDeleteCatalog = $statement->affected_rows > 0;
-        
-        if ($isDeleteAllPhoto == TRUE && $isDeleteCatalog == TRUE) {
-            return TRUE;
-        } else{
-            return FALSE;
-        }
+        return $statement->affected_rows > 0;   
     }
     
-    public function AddCatalog($name, $description, $upload) {
+    public function AddCatalog($name, $description, $upload, $category) {
         $userId  = UserDetails::getUserId();
 
         if ($userId == FALSE) {
@@ -48,15 +55,15 @@ class CatalogModel extends BaseModel {
         }
 
         $insert = self::$db->prepare(
-        "INSERT INTO `catalogs` (`Name`, `Description`, `image`, `UserId`)  VALUES (?, ?, ?, ?)");
-        $insert->bind_param('sssi', $name, $description, $upload, $userId);
+        "INSERT INTO `catalogs` (`Name`, `Description`, `image`, `UserId`, categoryId)  VALUES (?, ?, ?, ?, ?)");
+        $insert->bind_param('sssii', $name, $description, $upload, $userId, $category);
         $insert->execute();
 
         $_SESSION['msgContent'] = "каталогът беше успешно добавен!";
         return TRUE;
     }
     
-    public function EditCatalog($name, $description, $id) {
+    public function EditCatalog($name, $description, $id, $category) {
         $userId  = UserDetails::getUserId();
 
         if ($userId == FALSE) {
@@ -75,8 +82,8 @@ class CatalogModel extends BaseModel {
         }
 
         $update = self::$db->prepare(
-        "UPDATE `catalogs` SET `Name`=?,`Description`=? WHERE `Id`=$id");
-        $update->bind_param('ss', $name, $description);
+        "UPDATE `catalogs` SET `Name`=?,`Description`=?, categoryId=? WHERE `Id`=$id");
+        $update->bind_param('sss', $name, $description, $category);
         $update->execute();
 
         $_SESSION['msgContent'] = "каталогът беше успешно редактирън!";

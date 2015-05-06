@@ -15,7 +15,7 @@ if (!Security::IsPermissionsUser()) {
                     echo '<div  class="col-md-3 col-xs-10 col-lg-2 category">';
                         echo '<span class="iconsCatalog"><i onclick="addPhoto('. $catalog['Id'] .')" title="Добавяне на снимка" class="fa fa-plus-circle"></i>';
                         echo '<i onclick="editCatalog(\''.htmlspecialchars($catalog['Name']).'\',\''.htmlspecialchars($catalog['Description']).'\',' 
-                                 . $catalog['Id'] . ')" title="редакция" class="fa fa-pencil rightSpase"></i>';
+                                 . $catalog['Id'] . ','  . $catalog['categoryId'] .')" title="редакция" class="fa fa-pencil rightSpase"></i>';
                         echo '<i  onclick="confirmDelete(\''.htmlspecialchars($catalog['Name']).'\','. $catalog['Id'] .')" '
                                 . 'title="изтриване" class="fa fa-trash-o rightSpase"></i></span>' ;
                         echo "<div class='row'>";

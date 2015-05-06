@@ -23,7 +23,7 @@ abstract class BaseController {
     public function Index(){
         //default action
     }
-    
+        
     public function renderView($viewName = NULL, $includeLayout = TRUE) {
         if (!$this->ifViewRendered) {
             if ($viewName == NULL) {

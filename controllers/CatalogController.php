@@ -3,14 +3,17 @@
 class CatalogController extends BaseController {
     public function Index() {
         $model = new CatalogModel();
+        $modelCategory = new CategoryModel();
+        
         if (isset($_SESSION['msgContentS'])) {
             $this->addInfoMessage($_SESSION['msgContentS']);
             unset($_SESSION['msgContentS']);
-        } elseif (isset ($_SESSION['msgContentErr'])) {
+        } else if (isset($_SESSION['msgContentErr'])) {
             $this->addErrorMessage($_SESSION['msgContentErr']);
              unset($_SESSION['msgContentErr']);
         }
-        $this->catalogs = $model->getAll();
+        $this->catalogs = $model->getAllById();
+        $this->categories = $modelCategory->getAll();
         
         $this->renderView("index");
     }
@@ -49,9 +52,10 @@ class CatalogController extends BaseController {
             }
             $name = trim($_POST['catalogName']);
             $description = trim($_POST['catalogDescription']);
-
+            $category = $_POST['category'];
+            
             if (!isset($_SESSION['msgContentImgErr'])) {
-                if ($model->AddCatalog($name, $description, $upload)) {
+                if ($model->AddCatalog($name, $description, $upload, $category)) {
                     $this->addInfoMessage($_SESSION['msgContent']);
                 } else{
                     $this->addErrorMessage($_SESSION['msgContent']);
@@ -63,14 +67,15 @@ class CatalogController extends BaseController {
         }
          $this->redirect('catalog');
     }
-
+     
     public function editCatalog() {
         if ($this->isPost) {
             $model = new CatalogModel();
             $name = trim($_POST['catalogName']);
             $description = trim($_POST['catalogDescription']);
+            $category = $_POST['category'];
             $id = $_POST['id'];
-            if ($model->EditCatalog($name, $description, $id)) {
+            if ($model->EditCatalog($name, $description, $id, $category)) {
                  $this->addInfoMessage($_SESSION['msgContent']);
             } else{
                 $this->addErrorMessage($_SESSION['msgContent']);

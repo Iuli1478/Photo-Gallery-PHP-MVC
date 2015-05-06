@@ -2,6 +2,12 @@
 
 class PhotoModel extends BaseModel {
     
+    public function getAll() {
+        $statement = self::$db->query(
+            "SELECT * FROM `photos` ORDER BY `Rang` ASC");
+        return $statement->fetch_all(MYSQLI_ASSOC);
+    }
+ 
     public function AddPhoto($name, $description, $upload, $catalogId) {
         $userId  = UserDetails::getUserId();
 
