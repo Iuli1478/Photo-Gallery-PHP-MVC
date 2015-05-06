@@ -36,14 +36,14 @@ function filterByCategory(id){
         $("#catalogs").html( data );
     });
 }
-function showComment(){
-    $('.catalogComents').show();
-    $('#showComment').hide();
-    $('#hideComment').show();
+function showComment(catalogId){
+    $('.catalogComents' + catalogId).show();
+    $('#showComment' + catalogId).hide();
+    $('#hideComment' + catalogId).show();
 }
-function hideComment(){
-    $('.catalogComents').hide();
-    $('#showComment').show();
-    $('#hideComment').hide();
+function hideComment(catalogId){
+    $('.catalogComents' + catalogId).hide();
+    $('#showComment' + catalogId).show();
+    $('#hideComment' + catalogId).hide();
 }
 </script>
