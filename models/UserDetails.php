@@ -8,4 +8,11 @@ class UserDetails {
             return false;
         }
     }
+    public static function getUserId() {
+        if (isset($_SESSION['UserId'])) {
+            return $_SESSION['UserId'];
+        } else {
+            return FALSE;
+        }
+    }
 }

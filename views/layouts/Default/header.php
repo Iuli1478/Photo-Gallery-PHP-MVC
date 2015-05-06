@@ -37,6 +37,11 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="/">Начало</a></li>
                                 <li><a href="/gallery">Галерия</a></li>
+                                <?php 
+                                if (UserDetails::isLogged()){
+                                    echo '<li><a href="/catalog">Моята галерия</a></li>';
+                                }
+                                ?>
                                 <li><a href="/authours">Authors</a></li>
                                 <li><a href="/books/books">Books</a></li>
                             </ul> 
@@ -48,9 +53,8 @@
                                     echo '</ul>';  
                                 } else{
                                     echo '<ul class="nav navbar-nav navbar-right">';
-                                    echo '<li><a href="user/logOut" style="margin-right: 10px;" type="button">Излез</a></li>'; 
+                                    echo '<li><a href="/user/logOut" style="margin-right: 10px;" type="button">Излез</a></li>'; 
                                     echo '</ul>'; 
-                                    
                                 }
                             ?>
                         </div>

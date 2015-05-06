@@ -9,7 +9,6 @@ class Security {
             return false;
         }
     }
-    
     public static function regex($string, $regexNr = 0, $customRegex = "") {
         $regex[-1] = $customRegex;
         $regex = array('/^[a-zA-Z0-9_]*$/', '/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})*$/', '/^[a-zA-Z]*$/', '/^[0-9]*$/');
@@ -24,5 +23,14 @@ class Security {
         } else {
             return false;
         }
+    }
+    public static function IsPermissionsUser() {
+       
+        if (UserDetails::isLogged()) {
+            return TRUE;
+        } else{
+            return FALSE;
+        }
+       
     }
 }

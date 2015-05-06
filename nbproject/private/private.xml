@@ -3,21 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/views/layouts/Default/header.php</file>
-            <file>file:/C:/xampp/htdocs/views/layouts/Default/login.php</file>
-            <file>file:/C:/xampp/htdocs/controllers/HomeController.php</file>
-            <file>file:/C:/xampp/htdocs/models/UserModel.php</file>
-            <file>file:/C:/xampp/htdocs/views/Authours/index.php</file>
-            <file>file:/C:/xampp/htdocs/views/layouts/Default/messages.php</file>
-            <file>file:/C:/xampp/htdocs/controllers/UserController.php</file>
-            <file>file:/C:/xampp/htdocs/index.php</file>
-            <file>file:/C:/xampp/htdocs/controllers/BaseController.php</file>
+            <file>file:/C:/xampp/htdocs/content/styles/styles.css</file>
             <file>file:/C:/xampp/htdocs/views/Authours/create.php</file>
-            <file>file:/C:/xampp/htdocs/controllers/AuthoursController.php</file>
+            <file>file:/C:/xampp/htdocs/views/Authours/index.php</file>
             <file>file:/C:/xampp/htdocs/models/AuthorsModel.php</file>
-            <file>file:/C:/xampp/htdocs/models/UserDetails.php</file>
-            <file>file:/C:/xampp/htdocs/includes/config.php</file>
-            <file>file:/C:/xampp/htdocs/models/BaseModel.php</file>
+            <file>file:/C:/xampp/htdocs/views/Catalog/index.php</file>
+            <file>file:/C:/xampp/htdocs/index.php</file>
+            <file>file:/C:/xampp/htdocs/models/CatalogModel.php</file>
+            <file>file:/C:/xampp/htdocs/controllers/CatalogController.php</file>
         </group>
     </open-files>
 </project-private>

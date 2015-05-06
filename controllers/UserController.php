@@ -5,8 +5,8 @@ class UserController extends BaseController {
         if ($this->isPost) {
             $model = new UserModel();
             $user = $_POST['user'];
-            //$pass = md5($_POST['pass']);
-            $pass = $_POST['pass'];
+            $pass = md5($_POST['pass']);
+            //$pass = $_POST['pass'];
             
             if ($model->logIn($user, $pass)) {
                 $this->addInfoMessage($_SESSION['msgContent']);

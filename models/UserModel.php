@@ -5,15 +5,16 @@ class UserModel extends BaseModel {
         
         if (!empty($user) && !empty($pass)) {
             $statement = self::$db->prepare(
-            "SELECT `UserName`, `Password` FROM `users` WHERE `UserName`=? AND `Password`=?");
+            "SELECT `Id`, `UserName`, `Password` FROM `users` WHERE `UserName`=? AND `Password`=?");
             $statement->bind_param('ss', $user, $pass);
             $statement->execute();
-            $statement->num_rows();
-            $num_rows = (int) $statement->fetch();
-            
-            if ($num_rows === 1) {
-                $_SESSION['user'] = $user;
-                $_SESSION['pass'] = $pass;
+            $statement->bind_result($id, $userName, $password);
+            $Userid = $statement->fetch();
+
+            if ($id != NULL && $userName != NULL && $password != NULL) {
+                $_SESSION['UserId'] = $id;
+                $_SESSION['user'] = $userName;
+                $_SESSION['pass'] = $password;
                 $_SESSION['msgContent'] = "Успешен вход";
                 return TRUE;
             } else {
