@@ -45,8 +45,6 @@
                                     echo '<li><a href="/catalog">Моята галерия</a></li>';
                                 }
                                 ?>
-                                <li><a href="/authours">Authors</a></li>
-                                <li><a href="/books/books">Books</a></li>
                             </ul> 
                             <?php 
                                 if (!UserDetails::isLogged()){

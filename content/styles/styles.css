@@ -136,6 +136,76 @@ header{
 #hideComment{
     display: none;
 }
+.products{
+    margin-left: 20%;
+}
+.productTitle{
+    margin: 10px 10px 0px 0px;
+}
+.productImg{
+    margin: 10px;
+}
+.space{
+    margin-bottom: 10px;
+}
+.quantityContent{
+    margin: 10px 0px 10px 10px;
+}
+.like{
+    margin: 10px 0px 10px 10px;
+}
+.imgBtn{
+    width: 200px;
+    margin: 2px;
+}
+@media screen and (max-width: 1000px){
+    .products{
+        margin-left: 50px;
+    }
+    .likes{
+        margin-left: 20px;
+    }
+}
+.product{
+    display: block;
+    padding-bottom: 10px;
+    line-height: 1;
+    margin: 5px;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.productsTitle{
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+}
+
+.productsImgContent{
+    height: 250px;
+    margin-top: 15px;
+    //margin-left: 20px;
+    text-align: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.productsImg{
+    max-height: 220px;
+    max-width: 100%;
+}
+.summaryContent{
+  height: 70px;
+}
+#likesContent{
+    font-size: 22px;
+}
+.likes{
+    font-size: 20px;
+}
 @media screen and (max-width: 1000px){
     .categoryImg{
         max-height: none;
@@ -146,6 +216,7 @@ header{
         height: auto;
     }    
 }
+
 @font-face {
     font-family: 'fontawesome-webfont';
     src: url('./fonts/glyphicons-halflings-regular.woff2') format('truetype');

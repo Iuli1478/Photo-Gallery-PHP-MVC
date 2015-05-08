@@ -31,7 +31,6 @@ if (class_exists($controllerClassName )) {
 }
 
 if (method_exists($controller, $actionName )) {
-   // $controller -> {$actionName}($params);
     call_user_func_array(array($controller, $actionName), $params);
     $controller->renderView();
 } else {

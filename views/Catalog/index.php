@@ -45,7 +45,7 @@ if (!Security::IsPermissionsUser()) {
     <div class="modal-content">
       <div style="text-align: center" class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Наистина ли искате да изтриете този каталог ? <br /> <span style="color: red;">Внимание!! Ако изтриете каталог ще бъдат изтрити всички снимки в него !!! </span><span class="categoyName"></span> </h4>
+        <h4 class="modal-title" id="myModalLabel">Наистина ли искате да изтриете този албум ? <br /> <span style="color: red;">Внимание!! Ако изтриете албума ще бъдат изтрити всички снимки и коментари в него !!! </span><span class="categoyName"></span> </h4>
       </div>
         <form enctype="multipart/form-data" role="form" method="post">
             <input id="catalogIdConfirm" type="hidden" name="id" />

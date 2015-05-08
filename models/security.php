@@ -25,12 +25,14 @@ class Security {
         }
     }
     public static function IsPermissionsUser() {
-       
         if (UserDetails::isLogged()) {
             return TRUE;
         } else{
             return FALSE;
         }
-       
+    }
+    public static function IsUserLikePhoto($photoId) {
+        $model = new LikeModel();
+        return $model->isUserLikePhoto($photoId);  
     }
 }

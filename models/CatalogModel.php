@@ -28,7 +28,10 @@ class CatalogModel extends BaseModel {
         $deletePhotosStatement->bind_param("i", $Id);
         $deletePhotosStatement->execute(); 
        
-        
+        $deleteCommentsStatement = self::$db->prepare("DELETE FROM `comments` WHERE CatalogId=?");
+        $deleteCommentsStatement->bind_param("i", $Id);
+        $deleteCommentsStatement->execute(); 
+         
         $statement = self::$db->prepare(
         "DELETE FROM catalogs WHERE Id = ?");
         $statement->bind_param("i", $Id);
