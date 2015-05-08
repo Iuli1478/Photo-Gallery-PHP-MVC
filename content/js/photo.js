@@ -53,3 +53,19 @@ function unLikePhoto(photoId){
         $('#likesContent').html(newLike);
     });
 }
+
+function deleteComment(commentId, photoUserId, photoId){
+    debugger;
+    $('#commentId').val(commentId);
+    $('#photoUserId').val(photoUserId);
+    $('#currPhotoId').val(photoId);
+    $('#confirmDeleteModal').modal('show');
+}
+function editCommentModal(commentId, commentUserId, description, photoIdEdit){
+    $('#commentId').val(commentId);
+    $('#commentUserId').val(commentUserId);
+    $('#description').val(description);
+    $('#isCatalog').val(0);
+    $('#photoIdEdit').val(photoIdEdit);
+    $('#editCommentModal').modal('show');
+}

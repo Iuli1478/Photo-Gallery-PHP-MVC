@@ -35,4 +35,8 @@ class Security {
         $model = new LikeModel();
         return $model->isUserLikePhoto($photoId);  
     }
+    public static function IsUserLikeCatalog($catalogId) {
+        $model = new LikeModel();
+        return $model->isUserLikeCatalog($catalogId);  
+    }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="/content/styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    
     <link href="/content/styles/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="/content/styles/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="/content/styles/styles.css" rel="stylesheet" type="text/css"/>
@@ -54,6 +54,7 @@
                                     echo '</ul>';  
                                 } else{
                                     echo '<ul class="nav navbar-nav navbar-right">';
+                                    echo '<li><a href="#" style="margin-right: 10px;"  data-toggle="modal" data-target="#userDetailsModal"  type="button">Здравей: ' . UserDetails::getUserName() . '</a></li>'; 
                                     echo '<li><a href="/user/logOut" style="margin-right: 10px;" type="button">Излез</a></li>'; 
                                     echo '</ul>'; 
                                 }
@@ -63,6 +64,9 @@
                     </nav>
                     <a href="/"><img class="logo" src="/content/img/logo.png" /></a>
                 </header>
-                <?php include('messages.php'); ?>
-                <?php include('login.php'); ?>
-                <?php include('registration.php'); ?>
+                <?php 
+                include('messages.php'); 
+                include('login.php'); 
+                include('registration.php');
+                include('userDeteils.php');
+                ?>

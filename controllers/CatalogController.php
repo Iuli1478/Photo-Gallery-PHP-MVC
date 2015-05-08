@@ -18,13 +18,27 @@ class CatalogController extends BaseController {
         $this->renderView("index");
     }
     
-    public function Delete($Id) {
+    public function Delete($Id, $catalogUserId) {
         $model = new CatalogModel();
-         if ($model->delete($Id)) {
+         if ($model->delete($Id, $catalogUserId)) {
              $_SESSION['msgContentS'] = "каталогът беше успешно изтрит";
         } else{
             $_SESSION['msgContentErr'] = "възникна грешка моля опитайте отново";
         }
+    }
+    
+    public function DeleteComment() {
+        $model = new CatalogModel();
+        
+        $Id = $_POST['commentId'];
+        $commentUserId = $_POST['commentUserId'];
+        
+        if ($model->deleteComment($Id, $commentUserId)) {
+           $this->addInfoMessage('Коментарът беше успешно изтрит');
+        } else {
+            $this->addErrorMessage($_SESSION['msgContent']);
+        }
+        return $this->redirect("gallery");
     }
     
     public function AddNew() {
@@ -74,13 +88,34 @@ class CatalogController extends BaseController {
             $name = trim($_POST['catalogName']);
             $description = trim($_POST['catalogDescription']);
             $category = $_POST['category'];
+            $userId = $_POST['catalogUserId'];
             $id = $_POST['id'];
-            if ($model->EditCatalog($name, $description, $id, $category)) {
+            if ($model->EditCatalog($name, $description, $id, $category, $userId)) {
                  $this->addInfoMessage($_SESSION['msgContent']);
             } else{
                 $this->addErrorMessage($_SESSION['msgContent']);
             }
             $this->redirect('catalog');
+        }
+    }
+    
+    public function likeCatalog($catalogId) {
+        $model = new CatalogModel();
+        
+        if ($model->likeCatalog($catalogId)) {
+            return '';
+        } else{
+            return $_SESSION['msgContent'];
+        }
+    }
+    
+    public function unLikeCatalog($catalogId) {
+        $model = new CatalogModel();
+        
+        if ($model->unLikeCatalog($catalogId)) {
+            return '';
+        } else{
+            return $this-> $_SESSION['msgContent'];
         }
     }
     

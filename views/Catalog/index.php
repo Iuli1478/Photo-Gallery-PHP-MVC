@@ -11,16 +11,16 @@ if (!Security::IsPermissionsUser()) {
         <?php
         if (isset($this->catalogs)) {
             foreach ($this->catalogs as $catalog){
-                echo "<span style='cursor:pointer;' class='categoryContent' title='" . htmlspecialchars($catalog['Description']) . "' href='#'>  ";
+                echo "<span style='cursor:pointer;' class='categoryContent' title='" . str_replace("\"", "\\\"", htmlspecialchars($catalog['Description'])) . "' href='#'>  ";
                     echo '<div  class="col-md-3 col-xs-10 col-lg-2 category">';
                         echo '<span class="iconsCatalog"><i onclick="addPhoto('. $catalog['Id'] .')" title="Добавяне на снимка" class="fa fa-plus-circle"></i>';
-                        echo '<i onclick="editCatalog(\''.htmlspecialchars($catalog['Name']).'\',\''.htmlspecialchars($catalog['Description']).'\',' 
-                                 . $catalog['Id'] . ','  . $catalog['categoryId'] .')" title="редакция" class="fa fa-pencil rightSpase"></i>';
-                        echo '<i  onclick="confirmDelete(\''.htmlspecialchars($catalog['Name']).'\','. $catalog['Id'] .')" '
+                        echo '<i onclick="editCatalog(\''. str_replace("'","\'", htmlspecialchars($catalog['Name'])).'\',\''.str_replace("'", "\'", htmlspecialchars($catalog['Description'])).'\',' 
+                                 . $catalog['Id'] . ','  . $catalog['categoryId'] .', ' . $catalog['UserId'] . ')" title="редакция" class="fa fa-pencil rightSpase"></i>';
+                        echo '<i  onclick="confirmDelete(\''.htmlspecialchars($catalog['Name']).'\','. $catalog['Id'] .', '. $catalog['UserId'] .')" '
                                 . 'title="изтриване" class="fa fa-trash-o rightSpase"></i></span>' ;
                         echo "<div class='row'>";
                         echo '<div class="col-md-12 col-xs-12 col-lg-12 categoryTitle"> '
-                                 . '<span>' . htmlspecialchars($catalog['Name']) . '</span>'; 
+                                 . '<span>' .  htmlspecialchars($catalog['Name']) . '</span>'; 
                             echo  '</div>';
                         echo "</div>";
                         echo "<div class='row'>";
@@ -49,13 +49,14 @@ if (!Security::IsPermissionsUser()) {
       </div>
         <form enctype="multipart/form-data" role="form" method="post">
             <input id="catalogIdConfirm" type="hidden" name="id" />
+            <input id="catalogUserId" type="hidden" name="catalogUserId" />
                 <div class="modal-footer">
                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Не</button>
                        <input type="button" onclick="deleteCatalog()" name="save" class="btn btn-success pull-right" value="Да" />
-                </div>
-            </div>
+                </div>          
         </form>
     </div>
+  </div>
   </div>
 <script src="/content/js/catalog.js" type="text/javascript"></script>
 <div class="clear"></div>

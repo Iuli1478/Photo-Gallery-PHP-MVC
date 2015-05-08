@@ -7,10 +7,12 @@ class GalleryController extends BaseController {
         $categoryModel = new CategoryModel();
         $commentModel = new CommentModel();
         $userModel = new UserModel();
+        $likes = new LikeModel();
         
         $this->categories = $categoryModel->getAll();
         $this->comments = $commentModel->getAll();
         $this->users = $userModel->getAll();
+        $this->likes = $likes->getLikesCatalog();
         
         if ($categoryId == '') {
              $this->catalogs = $catalogModel->getAll();

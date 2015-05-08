@@ -58,6 +58,27 @@ class CommentModel extends BaseModel {
         return FALSE;
     }
     
+    public function edit($id, $commentUserId, $description) {
+        $userId  = UserDetails::getUserId();
+        if ($userId != $commentUserId) {
+           $_SESSION['msgContent'] = "Достъпът отказан"; 
+           return FALSE;
+        }
+        
+        $update = self::$db->prepare(
+        "UPDATE `comments` SET `Description`=? WHERE `Id`=?");
+        $update->bind_param('si', $description, $id);
+        $update->execute();
+        
+        if ($update) {
+            $_SESSION['msgContent'] = "коментарът беше успешно редактирън!";
+            return TRUE;
+        } else{
+            $_SESSION['msgContent'] = "Възникна грешка моля опитайте отново";
+            return FALSE;
+        }
+    }
+    
     public function delete($id, $photoUserId) {
         $userId  = UserDetails::getUserId();
         if ($userId != $photoUserId) {

@@ -1,9 +1,10 @@
-<div id="catalogs" class="col-md-9 col-xs-10 col-lg-9 galeryMine">
+<h3>Албуми</h3>
+<div id="catalogs" class="col-md-9 col-xs-12 col-lg-9 galeryMine">
     <?php
     require '_catalogsByCategoryId.php'; 
     ?>
 </div>
-<div class="col-md-3 col-xs-2 col-lg-3 galeryCatalog">
+<div class="col-md-3 col-xs-12 col-lg-3 galeryCatalog">
     <div class="center">
         <a href="/gallery">Всички</a>
     </div>

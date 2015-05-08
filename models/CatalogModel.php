@@ -8,6 +8,12 @@ class CatalogModel extends BaseModel {
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
     
+    public function getTopN($count) {
+        $statement = self::$db->query(
+            "SELECT * FROM `catalogs` ORDER BY `Likes` DESC LIMIT $count");
+        return $statement->fetch_all(MYSQLI_ASSOC);
+    }
+    
     public function getAllById() {
         $userId  = UserDetails::getUserId();
         $statement = self::$db->query(
@@ -22,7 +28,14 @@ class CatalogModel extends BaseModel {
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
     
-    public function delete($Id) {
+    public function delete($Id, $catalogUserId) {
+        
+         $userId  = UserDetails::getUserId();
+        
+        if ($catalogUserId != $userId){
+            $_SESSION['msgContent'] = "Достъпът отказан";
+            return FALSE;
+        }
         
         $deletePhotosStatement = self::$db->prepare("DELETE FROM `photos` WHERE CatalogId=?");
         $deletePhotosStatement->bind_param("i", $Id);
@@ -34,6 +47,20 @@ class CatalogModel extends BaseModel {
          
         $statement = self::$db->prepare(
         "DELETE FROM catalogs WHERE Id = ?");
+        $statement->bind_param("i", $Id);
+        $statement->execute();
+        return $statement->affected_rows > 0;   
+    }
+    
+    public function deleteComment($Id, $commentUserId) {     
+         $userId  = UserDetails::getUserId();
+         if ($commentUserId != $userId) {
+            $_SESSION['msgContent'] = "Нямате достъп";
+            return FALSE;
+         }
+         
+        $statement = self::$db->prepare(
+        "DELETE FROM comments WHERE Id = ?");
         $statement->bind_param("i", $Id);
         $statement->execute();
         return $statement->affected_rows > 0;   
@@ -66,11 +93,16 @@ class CatalogModel extends BaseModel {
         return TRUE;
     }
     
-    public function EditCatalog($name, $description, $id, $category) {
+    public function EditCatalog($name, $description, $id, $category, $catalogUserId) {
         $userId  = UserDetails::getUserId();
 
+        if ($catalogUserId != $userId) {
+            $_SESSION['msgContent'] = "Достъпът отказан";
+            return FALSE;
+        }
+        
         if ($userId == FALSE) {
-            $_SESSION['msgContent'] = "Нямате достъп";
+            $_SESSION['msgContent'] = "Достъпът отказан";
             return FALSE;
         }
 
@@ -91,6 +123,52 @@ class CatalogModel extends BaseModel {
 
         $_SESSION['msgContent'] = "каталогът беше успешно редактирън!";
         return TRUE;
+    }
+    
+    public function likeCatalog($catalogId) {
+        
+        $userId  = UserDetails::getUserId();
+        if (!$userId) {
+            $_SESSION['msgContent'] = "Възникна грешка моля опитайте отново";
+            return FALSE;
+        }
+        $isUserLike = Security::IsUserLikeCatalog($catalogId);  
+        if ($isUserLike) {
+            $_SESSION['msgContent'] = "Достъпът отказан !";
+            return FALSE;
+        }   
+        
+        $like = self::$db->query("UPDATE `catalogs` SET `Likes`= `Likes`+1 WHERE Id=$catalogId");
+  
+        $insertLike = self::$db->prepare("INSERT INTO `likes`(`UserId`, `CatalogId`) VALUES (?, ?)");
+        $insertLike->bind_param("ii", $userId, $catalogId);
+        $insertLike->execute(); 
+
+        return TRUE;
+        
+    }
+    public function unLikeCatalog($catalogId) {
+        
+        $userId  = UserDetails::getUserId();
+        if (!$userId) {
+            $_SESSION['msgContent'] = "Възникна грешка моля опитайте отново";
+            return FALSE;
+        }
+        
+        $isUserLike = Security::IsUserLikeCatalog($catalogId);  
+        if (!$isUserLike) {
+            $_SESSION['msgContent'] = "Достъпът отказан !";
+            return FALSE;
+        } 
+        
+        $like = self::$db->query("UPDATE `catalogs` SET `Likes`= `Likes`-1 WHERE Id=$catalogId");
+  
+        $insertLike = self::$db->prepare("DELETE FROM `likes` WHERE `UserId`=? AND `CatalogId`=?");
+        $insertLike->bind_param("ii", $userId, $catalogId);
+        $insertLike->execute(); 
+
+        return TRUE;
+        
     }
     
 }

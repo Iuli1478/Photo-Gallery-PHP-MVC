@@ -25,7 +25,7 @@ body {
     
 }
 header{
-    border-bottom: 1px solid #ccc;
+  //  border-bottom: 1px solid #ccc;
     padding-bottom: 20px;
 }
 .addCAtalog{
@@ -104,7 +104,7 @@ header{
     text-align: center;
 }
 .galeryCatalogImage{
-    width: 100px;
+    width: 250px;
 
 }
 .galeryCatalogImage img{
@@ -123,12 +123,14 @@ header{
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
     -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-    width: 50%;
+    width: 70%;
     margin: 10px auto;
     padding-left: 10px;
+    min-height: 265px;
 }
 .galeryCatalogDescription{
     margin-top: 10px;
+    height: 100px;
 }
 .catalogComents{
     display: none;
@@ -157,6 +159,17 @@ header{
 .imgBtn{
     width: 200px;
     margin: 2px;
+}
+.photoComents{
+    width: 51%;
+    margin-top: 10px;
+    padding: 20px;
+    border-top: 1px solid black;
+}
+.photoComentsBtn{
+    margin-top: 10px;
+    margin-left: -50px;
+    padding: 20px; 
 }
 @media screen and (max-width: 1000px){
     .products{
@@ -206,6 +219,10 @@ header{
 .likes{
     font-size: 20px;
 }
+.btnCatalogComments{
+    width: 200px;
+    margin-bottom: 5px;
+}
 @media screen and (max-width: 1000px){
     .categoryImg{
         max-height: none;
@@ -216,28 +233,24 @@ header{
         height: auto;
     }    
 }
-
-@font-face {
-    font-family: 'fontawesome-webfont';
-    src: url('./fonts/glyphicons-halflings-regular.woff2') format('truetype');
+.topCatalogs{
+    max-height: 500px;;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 50px;
 }
-@font-face {
-    font-family: 'fontawesome-webfont';
-    src: url('./fonts/glyphicons-halflings-regular.woff') format('truetype');
+.topN{
+    margin: 20px;
 }
-@font-face {
-    font-family: 'fontawesome-webfont';
-    src: url('./fonts/glyphicons-halflings-regular.ttf') format('truetype');
+.catalogComents{
+    width: 91%;
+    margin-top: 10px;
 }
-@font-face {
-    font-family: 'fontawesome-webfont';
-    src: url('./fonts/fontawesome-webfont.ttf') format('truetype');
+.catalogComents div{
+    padding: 20px;
+    border-top: 1px solid black;
 }
-@font-face {
-    font-family: 'fontawesome-webfont';
-    src: url('./fonts/fontawesome-webfont.eot') format('truetype');
-}
-@font-face {
-    font-family: 'fontawesome-webfont';
-    src: url('./fonts/fontawesome-webfont.woff') format('truetype');
+.commentName{
+    color: black;
+    font-weight: bold;
 }

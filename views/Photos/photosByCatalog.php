@@ -14,8 +14,8 @@
                     echo '<div>';
                         if ($this->catalogUserId == UserDetails::getUserId()) {
                             echo '<span class="iconsCatalog">';
-                            echo "<i style='cursor:pointer;' onclick=\"editPhoto({$photo['Id']}, {$this->catalogUserId}, ' " . htmlspecialchars($photo['Name']) 
-                                    . " ', '" . htmlspecialchars($photo['Description']) . "', {$this->catalogId})\" title='редакция' class='fa fa-pencil rightSpase'></i>";
+                            echo '<i style="cursor:pointer;" onclick="editPhoto( ' . $photo['Id'] . ', ' . $this->catalogUserId . ' , \'' . str_replace("'", "\'", htmlspecialchars($photo['Name']))
+                                    . " ', '" . str_replace("'", "\'", htmlspecialchars($photo['Description'])) . "', {$this->catalogId})\" title='редакция' class='fa fa-pencil rightSpase'></i>";
                                     
                             echo "<i style='cursor:pointer;' onclick='deletePhoto({$photo['Id']},{$this->catalogId},{$this->catalogUserId})' title='изтриване' class='fa fa-trash-o rightSpase'></i></span>" ;
                         }

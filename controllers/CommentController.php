@@ -27,9 +27,13 @@ class CommentController extends BaseController {
         } 
     }
     
-    public function delete($id, $photoUserId, $photoId) {
+    public function delete() {
         
         $model = new CommentModel();
+        
+        $id = $_POST['commentId'];
+        $photoUserId = $_POST['photoUserId'];
+        $photoId = $_POST['currPhotoId'];
         
         if ($model->delete($id, $photoUserId)) {
             $this->addInfoMessage($_SESSION['msgContent']);
@@ -40,4 +44,30 @@ class CommentController extends BaseController {
         $parms = array($photoId);
         return $this->redirect("photos", "getPhotoById", $parms);
     }
+    
+    public function edit() {
+        
+        $model = new CommentModel();
+        
+        $Id = $_POST['commentId'];
+        $commentUserId = $_POST['commentUserId'];
+        $description = trim($_POST['description']);
+        $isCatalog = $_POST['isCatalog'];
+        $photoId = $_POST['photoIdEdit'];
+        
+        if ($model->edit($Id, $commentUserId, $description)) {
+            $this->addInfoMessage($_SESSION['msgContent']);
+        } else{
+            $this->addErrorMessage($_SESSION['msgContent']);
+        }
+        
+        if ($isCatalog == 1) {
+             return $this->redirect("gallery");
+        } else {
+            $parms = array($photoId);
+            return $this->redirect("photos", "getPhotoById", $parms);
+        }
+        
+    }
+    
 }

@@ -22,4 +22,11 @@ class UserDetails {
             return FALSE;
         }
     }
+    public static function getMailAddres() {
+        $model = new UserModel();
+        $mails = $model->getMail(UserDetails::getUserId());
+        foreach ($mails as $mail) {
+            return  $mail['Email'];
+        }
+    }
 }

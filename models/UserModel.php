@@ -8,6 +8,12 @@ class UserModel extends BaseModel {
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
     
+    public function getMail($userId) {
+        $statement = self::$db->query(
+            "SELECT Email FROM users WHERE Id=$userId ORDER BY Id");
+        return $statement->fetch_all(MYSQLI_ASSOC);
+    }
+    
     public function logIn($user, $pass) {
         
         if (!empty($user) && !empty($pass)) {

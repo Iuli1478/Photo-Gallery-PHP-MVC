@@ -8,6 +8,12 @@ class PhotoModel extends BaseModel {
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getTopNImage($count) {
+        $statement = self::$db->query(
+            "SELECT `Image` FROM `photos` ORDER BY `Likes` DESC LIMIT $count");
+        return $statement->fetch_all(MYSQLI_ASSOC);
+    }
+    
     public function getPhotoById($Id) {
         $statement = self::$db->query(
          "SELECT * FROM `photos` WHERE Id=$Id ORDER BY `Likes` ASC");
