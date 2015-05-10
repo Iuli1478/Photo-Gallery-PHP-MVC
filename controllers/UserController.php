@@ -1,12 +1,18 @@
 <?php
 
 class UserController extends BaseController {
+    
+    function getAll(){
+        $model = new UserModel();
+        $this->users = $model->getAll();
+        $this->renderView("index");
+    }
+    
     function LogIn() {
         if ($this->isPost) {
             $model = new UserModel();
             $user = $_POST['user'];
             $pass = md5($_POST['pass']);
-            //$pass = $_POST['pass'];
             
             if ($model->logIn($user, $pass)) {
                 $this->addInfoMessage($_SESSION['msgContent']);
@@ -14,7 +20,7 @@ class UserController extends BaseController {
                 $this->addErrorMessage($_SESSION['msgContent']);
             }
             $this->redirect('home');
-        }  
+        }
     }
     
     function LogOut() {
@@ -39,6 +45,15 @@ class UserController extends BaseController {
             }
 
             $this->redirect('home');
+        }
+    }
+    function changeRole($userId, $role){
+        $model = new UserModel();
+        
+        if ($model->changeRole($userId, $role)) {
+            return TRUE;
+        } else{
+            return FALSE;
         }
     }
 }

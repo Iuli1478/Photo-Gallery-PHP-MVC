@@ -9,6 +9,7 @@
         <form enctype="multipart/form-data" role="form" method="post" action="/catalog/editCatalog">
             <input id="catalogId" type="hidden" name="id" />
             <input type="hidden" id="UserId" name="catalogUserId" />
+            <input type="hidden" id="isAdminEdit" name="isAdmin" />
             <div class="modal-body">
                <div class="form-group">
                      <label for="name">Име на албума</label>

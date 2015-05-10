@@ -1,4 +1,5 @@
 <?php
+$isAdmin = UserDetails::isAdmin();
 foreach ($this->photo as $photo) {
     echo '<div calss="row">';
         echo '<div class="col-md-10 col-xs-10 col-lg-10 productTitle">';
@@ -51,7 +52,7 @@ foreach ($this->photo as $photo) {
                     echo '<div class="col-md-5 col-xs-10 col-lg-5 photoComents">';
                          echo '<span class="commentName">' . $comment['UserName'] . ':</span> ' .  htmlspecialchars($comment['Description']);
                     echo '</div>';
-                    if (UserDetails::isLogged() && $comment['UserId'] == UserDetails::getUserId()) {
+                    if (UserDetails::isLogged() && ($comment['UserId'] == UserDetails::getUserId() || $isAdmin )) {
                       echo '<div class="col-md-2 col-xs-2 col-lg-2 photoComentsBtn">';
                            echo '<span style="cursor:pointer;" class="iconsCatalog">'
                              . '<i onclick="editCommentModal(' . $comment['Id'] . ', ' . $comment['UserId'] . ', \'' . str_replace("'", "", htmlspecialchars($comment['Description']))  . '\', '. $photo['Id'] .')" '
@@ -83,8 +84,8 @@ require 'editComment.php';
                  <h4 class="modal-title" id="myModalLabel">Наистина ли искате да изтриете този коментар ?</h4>
             </div>
             <form enctype="multipart/form-data" role="form" action="/comment/delete/'" method="post">
-                <input id="commentId" type="hidden" name="commentId" />
-                <input id="photoUserId" type="hidden" name="photoUserId" />
+                <input id="commentIdDelete" type="hidden" name="commentId" />
+                <input id="photoUserIdDelete" type="hidden" name="photoUserId" />
                 <input id="currPhotoId" type="hidden" name="currPhotoId" />
                 <div class="modal-footer">
                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Не</button>

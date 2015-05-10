@@ -14,7 +14,7 @@ abstract class BaseModel {
       }
     }
     
-    public function UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash){
+    public function UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash, $imageName){
       sleep(1);
       if (!isset($imgErr))
       {
@@ -29,7 +29,7 @@ abstract class BaseModel {
                                                "Текущ размер ".round($filesize/1024)." KB";
           } else{
               if (is_uploaded_file($tempName)) {
-                      move_uploaded_file($tempName, $upload_path.$upload_slash.$_FILES['upfile']['name']);
+                      move_uploaded_file($tempName, $upload_path.$upload_slash.$imageName.".".$imageFileType);//$_FILES['upfile']['name']);
               } 
           }
       }

@@ -4,7 +4,7 @@ class UserModel extends BaseModel {
     
    public function getAll() {
         $statement = self::$db->query(
-            "SELECT * FROM users ORDER BY Id");
+            "SELECT Id, UserName, Email, Role FROM users ORDER BY Id");
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
     
@@ -39,6 +39,22 @@ class UserModel extends BaseModel {
              return FALSE;
         }
     }
+    
+    public function isAdmin($userId) {
+        $statement = self::$db->prepare(
+        "SELECT `Role` FROM `users` WHERE `Id`=?");
+        $statement->bind_param('i', $userId);
+        $statement->execute();
+        $statement->bind_result($isAdmin);
+        $statement->fetch();
+
+        if ($isAdmin == 3) {
+            return TRUE;
+        } else{
+            return FALSE;
+        }
+    }
+    
     public function register($username, $password, $repassword, $email) {
         
         if (!Security::regex($username)) {
@@ -117,5 +133,12 @@ class UserModel extends BaseModel {
 
         $_SESSION['msgContent'] = "Вие успешно се регистрирахте! Моля влезете в акаунта си!";
         return TRUE;
+    }
+    
+    function changeRole($userId, $role){
+        $insert = self::$db->prepare(
+        "UPDATE `users` SET `Role`=? WHERE Id=?");
+        $insert->bind_param('si', $role, $userId);
+        $insert->execute();
     }
 }

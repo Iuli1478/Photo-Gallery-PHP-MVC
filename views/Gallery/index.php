@@ -25,26 +25,25 @@ require 'addComment.php';
 ?>
 
 <script>
+    function addComent(catalogId){
+        $('#catalogId').val(catalogId);
+        $('#addCommentModal').modal('show');
+    }
 
-function addComent(catalogId){
-    $('#catalogId').val(catalogId);
-    $('#addCommentModal').modal('show');
-}
-
-function filterByCategory(id){
-    var url = "/gallery/index/" + id;
-    $.post( url, function(data) {
-        $("#catalogs").html( data );
-    });
-}
-function showComment(catalogId){
-    $('.catalogComents' + catalogId).show();
-    $('#showComment' + catalogId).hide();
-    $('#hideComment' + catalogId).show();
-}
-function hideComment(catalogId){
-    $('.catalogComents' + catalogId).hide();
-    $('#showComment' + catalogId).show();
-    $('#hideComment' + catalogId).hide();
-}
+    function filterByCategory(id){
+        var url = "/gallery/index/" + id;
+        $.post( url, function(data) {
+            $("#catalogs").html( data );
+        });
+    }
+    function showComment(catalogId){
+        $('.catalogComents' + catalogId).show();
+        $('#showComment' + catalogId).hide();
+        $('#hideComment' + catalogId).show();
+    }
+    function hideComment(catalogId){
+        $('.catalogComents' + catalogId).hide();
+        $('#showComment' + catalogId).show();
+        $('#hideComment' + catalogId).hide();
+    }
 </script>

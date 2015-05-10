@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
     <link href="/content/styles/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="/content/styles/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="/content/styles/styles.css" rel="stylesheet" type="text/css"/>
@@ -42,7 +41,7 @@
                                 <li><a href="/gallery">Галерия</a></li>
                                 <?php 
                                 if (UserDetails::isLogged()){
-                                    echo '<li><a href="/catalog">Моята галерия</a></li>';
+                                    echo '<li><a href="/catalog">Управление на албуми</a></li>';
                                 }
                                 ?>
                             </ul> 
@@ -55,6 +54,15 @@
                                 } else{
                                     echo '<ul class="nav navbar-nav navbar-right">';
                                     echo '<li><a href="#" style="margin-right: 10px;"  data-toggle="modal" data-target="#userDetailsModal"  type="button">Здравей: ' . UserDetails::getUserName() . '</a></li>'; 
+                                    if (UserDetails::isAdmin()){
+                                        echo '<li style="margin-right:5px;" class="dropdown">';
+                                            echo  '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Администрация <span class="caret"></span></a>';
+                                            echo '<ul class="dropdown-menu" role="menu">';
+                                                echo '<li><a href="/catalog/adminGetAll" class="more more2">Албуми</a></li>';
+                                                echo '<li><a href="/user/getAll" class="more more2">Потребители</a></li>';
+                                            echo '</ul>';
+                                        echo '</li>';
+                                    }
                                     echo '<li><a href="/user/logOut" style="margin-right: 10px;" type="button">Излез</a></li>'; 
                                     echo '</ul>'; 
                                 }

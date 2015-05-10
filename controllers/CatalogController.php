@@ -15,6 +15,25 @@ class CatalogController extends BaseController {
         $this->catalogs = $model->getAllById();
         $this->categories = $modelCategory->getAll();
         
+      
+        $this->renderView("index");
+    }
+    
+    public function adminGetAll() {
+        $model = new CatalogModel();
+        $modelCategory = new CategoryModel();
+        
+        if (isset($_SESSION['msgContentS'])) {
+            $this->addInfoMessage($_SESSION['msgContentS']);
+            unset($_SESSION['msgContentS']);
+        } else if (isset($_SESSION['msgContentErr'])) {
+            $this->addErrorMessage($_SESSION['msgContentErr']);
+             unset($_SESSION['msgContentErr']);
+        }
+        $this->catalogs = $model->getAll();
+        $this->categories = $modelCategory->getAll();
+        $this->admin = TRUE;
+        
         $this->renderView("index");
     }
     
@@ -24,7 +43,7 @@ class CatalogController extends BaseController {
              $_SESSION['msgContentS'] = "каталогът беше успешно изтрит";
         } else{
             $_SESSION['msgContentErr'] = "възникна грешка моля опитайте отново";
-        }
+        }      
     }
     
     public function DeleteComment() {
@@ -55,14 +74,17 @@ class CatalogController extends BaseController {
                 $imgErr = $_FILES["upfile"]["error"];
                 $tempName = $_FILES['upfile']['tmp_name'];
                 $upload_slash = "/";
+                $imageName = "IMG_".md5(uniqid(rand(), true));
                 
-                $model->UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash);
+                $model->UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash, $imageName);
             }
 
             
             $upload = trim($_FILES['upfile']['name'] );
             if ($upload == '') {
                 $upload = "noImg.png";
+            } else{
+                $upload = $imageName.".".$imageFileType;
             }
             $name = trim($_POST['catalogName']);
             $description = trim($_POST['catalogDescription']);
@@ -79,7 +101,12 @@ class CatalogController extends BaseController {
                   unset($_SESSION['msgContentImgErr']);
             }
         }
-         $this->redirect('catalog');
+        
+        if ($_POST['isAdmin'] == "true") {
+            return $this->redirect('catalog', 'adminGetAll');
+        }
+        
+        $this->redirect('catalog');
     }
      
     public function editCatalog() {
@@ -94,6 +121,10 @@ class CatalogController extends BaseController {
                  $this->addInfoMessage($_SESSION['msgContent']);
             } else{
                 $this->addErrorMessage($_SESSION['msgContent']);
+            }
+            
+            if ($_POST['isAdmin'] == "true") {
+                return $this->redirect('catalog', 'adminGetAll');
             }
             $this->redirect('catalog');
         }

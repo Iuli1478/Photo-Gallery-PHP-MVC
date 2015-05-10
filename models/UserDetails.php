@@ -8,6 +8,19 @@ class UserDetails {
             return false;
         }
     }
+    public static function isAdmin() {
+        $model = new UserModel();
+        
+        if (isset($_SESSION['user']) && isset($_SESSION['pass'])) {
+            if ($model->isAdmin(UserDetails::getUserId())) {
+                return TRUE;
+            } else{
+                return FALSE;
+            }
+        } else{
+            return FALSE;
+        }
+    }
     public static function getUserId() {
         if (isset($_SESSION['UserId'])) {
             return $_SESSION['UserId'];

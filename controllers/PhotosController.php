@@ -44,10 +44,11 @@ class PhotosController extends BaseController {
                 $imgErr = $_FILES["upfile"]["error"];
                 $tempName = $_FILES['upfile']['tmp_name'];
                 $upload_slash = "/";
+                $imageName = "IMG_".md5(uniqid(rand(), true));
+                
+                $model->UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash, $imageName);
 
-                $model->UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash);
-
-                $upload = trim($_FILES['upfile']['name'] );
+                $upload = $imageName.".".$imageFileType;
                 $name = trim($_POST['photoName']);
                 $description = trim($_POST['photoDescription']);
                 $catalogId = $_POST['photoWithCatalogIdId'];
@@ -83,11 +84,12 @@ class PhotosController extends BaseController {
                 $imgErr = $_FILES["upfile"]["error"];
                 $tempName = $_FILES['upfile']['tmp_name'];
                 $upload_slash = "/";
-
-                $model->UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash);
+                $imageName = "IMG_".md5(uniqid(rand(), true));
+                
+                $model->UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash, $imageName);
             }
             
-            $upload = trim($_FILES['upfile']['name'] );
+            $upload = $imageName.".".$imageFileType;
             $name = trim($_POST['photoName']);
             $description = trim($_POST['photoDescription']);
             $Id = $_POST['Id'];

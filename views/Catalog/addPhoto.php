@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div style="text-align: center" class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Добавяне на снимка към каталог</h4>
+        <h4 class="modal-title" id="myModalLabel">Добавяне на снимка към албум</h4>
       </div>
         <form enctype="multipart/form-data" role="form" method="post" action="/photos/AddPhoto">
             <input type="hidden" name="photoWithCatalogIdId" id="photoWithCatalogIdId">

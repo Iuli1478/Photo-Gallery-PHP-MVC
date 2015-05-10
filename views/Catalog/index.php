@@ -1,10 +1,18 @@
 <?php
 if (!Security::IsPermissionsUser()) {
-    echo 'Нямате достъп до тази страница';
-   exit($this->renderView("index")); 
-}
+        echo 'Достъпът отказан';
+        exit($this->renderView("index")); 
+    }
+    
+    if (isset($this->admin)) {
+        if (UserDetails::isAdmin() == FALSE) {
+            echo 'Достъпът отказан';
+            exit($this->renderView("index")); 
+        }
+        echo '<div id="adminTrue" style="display:none;">admin</div> ';
+    }
 ?>
-<span class="btn btn-success addCAtalog" data-toggle="modal" data-target="#addCatalogModal"><i class="fa fa-plus"></i></span>
+<span class="btn btn-success addCAtalog" onclick="addCatalog()"><i class="fa fa-plus"></i></span>
 <div class="row">
     <div class="col-md-1 col-xs-1 col-lg-1"></div>
     <div class="col-md-10 col-xs-10 col-lg-10 categories">
@@ -18,15 +26,17 @@ if (!Security::IsPermissionsUser()) {
                                  . $catalog['Id'] . ','  . $catalog['categoryId'] .', ' . $catalog['UserId'] . ')" title="редакция" class="fa fa-pencil rightSpase"></i>';
                         echo '<i  onclick="confirmDelete(\''.htmlspecialchars($catalog['Name']).'\','. $catalog['Id'] .', '. $catalog['UserId'] .')" '
                                 . 'title="изтриване" class="fa fa-trash-o rightSpase"></i></span>' ;
-                        echo "<div class='row'>";
-                        echo '<div class="col-md-12 col-xs-12 col-lg-12 categoryTitle"> '
-                                 . '<span>' .  htmlspecialchars($catalog['Name']) . '</span>'; 
-                            echo  '</div>';
+                          echo "<span onclick='getPhoto(". $catalog['Id'] .", ". $catalog['UserId'] .")'>";
+                            echo "<div class='row'>";
+                                echo '<div class="col-md-12 col-xs-12 col-lg-12 categoryTitle"> '
+                                         . '<span>' .  htmlspecialchars($catalog['Name']) . '</span>'; 
+                                    echo  '</div>';
+                            echo "</div>";
+                            echo "<div class='row'>";
+                                     echo '<img class="categoryImg" src="../content/galleryPhoto/' . htmlspecialchars($catalog['image']) . '" alt=""/>';
+                            echo "</div>";
+                         echo '</span>';
                         echo "</div>";
-                        echo "<div class='row'>";
-                             echo '<img class="categoryImg" src="../content/galleryPhoto/' . htmlspecialchars($catalog['image']) . '" alt=""/>';
-                         echo "</div>";
-                    echo "</div>";
                 echo '</span>';
             }
         }

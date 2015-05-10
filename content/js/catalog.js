@@ -1,8 +1,17 @@
 function deleteCatalog(){
+    
     var url = "/catalog/delete/" + $('#catalogIdConfirm').val() + "/" + $('#catalogUserId').val();
    $.post(url, function() {
-        window.location.href = 'catalog';
+       
+        if ($('#adminTrue').html() == "admin") {
+            window.location.href = '/catalog/adminGetAll';
+        } else{
+            window.location.href = '/catalog';
+        }
   }); 
+}
+function getPhoto(catalogId, catalogUserId){
+    window.location.href = '/photos/PhotosByCatalog/' + catalogId + "/" + catalogUserId;
 }
 function confirmDelete(name, id, catalogUserId){
     $('.categoyName').val(name);
@@ -10,7 +19,16 @@ function confirmDelete(name, id, catalogUserId){
     $('#catalogUserId').val(catalogUserId);
     $('#confirmDeleteModal').modal('show');
 }
+function addCatalog(){
+    if ($('#adminTrue').html() == "admin") {
+        $('#isAdmin').val('true');
+    }
+    $('#addCatalogModal').modal('show');
+}
 function editCatalog(name, description, id, categoryId, UserId){
+    if ($('#adminTrue').html() == "admin") {
+        $('#isAdminEdit').val('true');
+    }
     $('.editCatalogName').val(name);
     $('.editCatalogDescription').val(description);
     $('#UserId').val(UserId);
@@ -27,9 +45,9 @@ function likeCatalog(catalogId){
     $.post(url, function() {
        $('#likeCatalog' + catalogId).hide();
        $('#unLikeCatalog' + catalogId).show();
-        var likes = $('#likesContent').html();
+        var likes = $('#likesContent' + catalogId).html();
         var newLike  = parseInt(likes) + 1;
-        $('#likesContent').html(newLike);
+        $('#likesContent' + catalogId).html(newLike);
     });
 }
 
@@ -38,9 +56,9 @@ function unLikeCatalog(catalogId){
     $.post(url, function() {
         $('#likeCatalog' + catalogId).show();
         $('#unLikeCatalog' + catalogId).hide();
-        var likes = $('#likesContent').html();
+        var likes = $('#likesContent' + catalogId).html();
         var newLike  = parseInt(likes) - 1;
-        $('#likesContent').html(newLike);
+        $('#likesContent' + catalogId).html(newLike);
     });
 }
 function deleteComment(commentId, commentUserId){

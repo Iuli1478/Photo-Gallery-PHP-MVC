@@ -240,6 +240,7 @@ header{
     margin-top: 50px;
 }
 .topN{
+    text-align: center;
     margin: 20px;
 }
 .catalogComents{
@@ -253,4 +254,9 @@ header{
 .commentName{
     color: black;
     font-weight: bold;
+}
+.catalogLikes{
+    margin-top: 10px;
+    margin-right: 10px;
+    float: right;
 }

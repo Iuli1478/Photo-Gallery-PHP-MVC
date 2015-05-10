@@ -57,8 +57,10 @@ class PhotoModel extends BaseModel {
         $userId  = UserDetails::getUserId();
 
         if ($userId == FALSE || $userId != $catalogUserId) {
-            $_SESSION['msgContent'] = "Нямате достъп";
-            return FALSE;
+            if (!UserDetails::isAdmin()) {
+                $_SESSION['msgContent'] = "Достъпът отказан"; 
+                return FALSE;
+            }
         }
 
         if (!Security::lenght($name, 4, 100)) {
@@ -89,8 +91,10 @@ class PhotoModel extends BaseModel {
     public function deletePhoto($id, $catalogUserId) {
         $userId  = UserDetails::getUserId();
         if ($catalogUserId != $userId) {
-            $_SESSION['msgContent'] = "Нямате право да триете тази снимка";
-            return FALSE;
+            if (!UserDetails::isAdmin()) {
+                $_SESSION['msgContent'] = "Достъпът отказан"; 
+                return FALSE;
+            }
         }
         
         $deleteCommentsStatement = self::$db->prepare("DELETE FROM `comments` WHERE PhotoId=?");

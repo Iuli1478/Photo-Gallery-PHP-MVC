@@ -56,8 +56,8 @@ function unLikePhoto(photoId){
 
 function deleteComment(commentId, photoUserId, photoId){
     debugger;
-    $('#commentId').val(commentId);
-    $('#photoUserId').val(photoUserId);
+    $('#commentIdDelete').val(commentId);
+    $('#photoUserIdDelete').val(photoUserId);
     $('#currPhotoId').val(photoId);
     $('#confirmDeleteModal').modal('show');
 }

@@ -61,8 +61,10 @@ class CommentModel extends BaseModel {
     public function edit($id, $commentUserId, $description) {
         $userId  = UserDetails::getUserId();
         if ($userId != $commentUserId) {
-           $_SESSION['msgContent'] = "Достъпът отказан"; 
-           return FALSE;
+            if (!UserDetails::isAdmin()) {
+                $_SESSION['msgContent'] = "Достъпът отказан"; 
+                return FALSE;
+            }
         }
         
         $update = self::$db->prepare(
@@ -82,8 +84,10 @@ class CommentModel extends BaseModel {
     public function delete($id, $photoUserId) {
         $userId  = UserDetails::getUserId();
         if ($userId != $photoUserId) {
-           $_SESSION['msgContent'] = "Достъпът отказан"; 
-           return FALSE;
+            if (!UserDetails::isAdmin()) {
+                $_SESSION['msgContent'] = "Достъпът отказан"; 
+                return FALSE;
+            }
         }
         
         $deleteComment = self::$db->query(

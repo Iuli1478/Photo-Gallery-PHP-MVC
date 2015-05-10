@@ -1,7 +1,7 @@
 <script src="/content/js/jssor.js" type="text/javascript"></script>
 <script src="/content/js/jssor.slider.js" type="text/javascript"></script>
 <div><br /></div>
-<h3 class="topN">Топ 10 най-харесвани снимки: </h3>
+<h3 class="topN">Топ 10 най-харесвани снимки</h3>
     <div class="col-sm-2 col-xs-1"></div>
         <div class="col-sm-8 col-xs-9">
                 <style> 
@@ -233,7 +233,7 @@
 <div class="clear"></div>
 
 <div class="topCatalogs">
-    <h3 class="topN">Топ 10 най-харесвани албума: </h3>
+    <h3 class="topN">Топ 10 най-харесвани албума</h3>
     <div class="row">
         <div class="col-md-1 col-xs-1 col-lg-1"></div>
         <div class="col-md-10 col-xs-10 col-lg-10 categories">

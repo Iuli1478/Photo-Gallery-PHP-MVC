@@ -5,6 +5,7 @@
         
         <div class="row" style="margin-right: 0">
         <?php
+        $isAdmin = UserDetails::isAdmin();
         if (count($this->photosByCatalog) <= 0) {
             echo '<h1>Няма налични снимки в този албум</h1>';
         } else{
@@ -12,7 +13,7 @@
                 //echo '<div>' . $photo['Name'] . '</div>';
                 echo "<span class=\"col-md-4 col-xs-10 col-lg-4 product\">";            
                     echo '<div>';
-                        if ($this->catalogUserId == UserDetails::getUserId()) {
+                        if ($this->catalogUserId == UserDetails::getUserId() || $isAdmin) {
                             echo '<span class="iconsCatalog">';
                             echo '<i style="cursor:pointer;" onclick="editPhoto( ' . $photo['Id'] . ', ' . $this->catalogUserId . ' , \'' . str_replace("'", "\'", htmlspecialchars($photo['Name']))
                                     . " ', '" . str_replace("'", "\'", htmlspecialchars($photo['Description'])) . "', {$this->catalogId})\" title='редакция' class='fa fa-pencil rightSpase'></i>";

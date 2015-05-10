@@ -7,6 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">Добавяне на нов албум</h4>
       </div>
         <form enctype="multipart/form-data" role="form" method="post" action="/catalog/AddNew">
+            <input type="hidden" id="isAdmin" name="isAdmin" />
             <div class="modal-body">
                <div class="form-group">
                      <label for="name">Име на албума</label>
@@ -17,7 +18,7 @@
                      <textarea name="catalogDescription" class="form-control" rows="5" id="description" placeholder="Описание"></textarea>
                </div>
                 <div class="form-group">
-                     <label for="description"> Категория  </label>
+                    <label for="description"> Категория  </label>
                     <select name="category" class="btn btn-default">
                         <?php
                         if (isset($this->categories)) {

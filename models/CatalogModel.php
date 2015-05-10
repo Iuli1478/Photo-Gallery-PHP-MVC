@@ -32,7 +32,7 @@ class CatalogModel extends BaseModel {
         
          $userId  = UserDetails::getUserId();
         
-        if ($catalogUserId != $userId){
+        if ($catalogUserId != $userId || !UserDetails::isAdmin()){
             $_SESSION['msgContent'] = "Достъпът отказан";
             return FALSE;
         }
@@ -55,8 +55,10 @@ class CatalogModel extends BaseModel {
     public function deleteComment($Id, $commentUserId) {     
          $userId  = UserDetails::getUserId();
          if ($commentUserId != $userId) {
-            $_SESSION['msgContent'] = "Нямате достъп";
-            return FALSE;
+            if (!UserDetails::isAdmin()) {
+                $_SESSION['msgContent'] = "Достъпът отказан"; 
+                return FALSE;
+            }
          }
          
         $statement = self::$db->prepare(
@@ -97,8 +99,10 @@ class CatalogModel extends BaseModel {
         $userId  = UserDetails::getUserId();
 
         if ($catalogUserId != $userId) {
-            $_SESSION['msgContent'] = "Достъпът отказан";
-            return FALSE;
+            if (!UserDetails::isAdmin()) {
+                $_SESSION['msgContent'] = "Достъпът отказан";
+                return FALSE;
+            }
         }
         
         if ($userId == FALSE) {
