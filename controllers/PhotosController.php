@@ -75,7 +75,7 @@ class PhotosController extends BaseController {
             $model = new PhotoModel();
             
             $imgName = $_FILES['upfile']['name'];
-            
+            $upload = '';
             if ($imgName != '') {
                 $filesize = $_FILES['upfile']['size'];
                 $imageFileType = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
@@ -87,9 +87,11 @@ class PhotosController extends BaseController {
                 $imageName = "IMG_".md5(uniqid(rand(), true));
                 
                 $model->UploadImage($imageFileType, $filesize, $max_file_size, $tempName, $upload_path, $imgErr, $upload_slash, $imageName);
+                
+                 $upload = $imageName.".".$imageFileType;
             }
             
-            $upload = $imageName.".".$imageFileType;
+           
             $name = trim($_POST['photoName']);
             $description = trim($_POST['photoDescription']);
             $Id = $_POST['Id'];
